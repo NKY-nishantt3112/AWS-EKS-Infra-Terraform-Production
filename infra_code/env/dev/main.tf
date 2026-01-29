@@ -11,12 +11,9 @@ module "data_azs" {
 module "eks_vpc" {
   source = "../../modules/vpc"
 
-  common_tags   = local.common_tags
-  public_subnet = var.public_subnet
-
+  common_tags            = local.common_tags
+  public_subnet          = var.public_subnet
   cidr_block             = var.cidr_block
-  enable_dns_hostnames   = var.enable_dns_hostnames
-  enable_dns_support     = var.enable_dns_support
   aws_vpc_security_group = var.aws_vpc_security_group
   client_name            = var.client_name
   private_subnet         = var.private_subnet

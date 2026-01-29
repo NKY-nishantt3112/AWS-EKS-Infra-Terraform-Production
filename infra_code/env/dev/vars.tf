@@ -12,12 +12,7 @@ variable "private_subnet" {
   }))
 }
 variable "cidr_block" {}
-variable "enable_dns_hostnames" {
-  type = bool
-}
-variable "enable_dns_support" {
-  type = bool
-}
+
 variable "aws_vpc_security_group" {
   description = "Security Group Ingress Rules"
   type = map(object({
