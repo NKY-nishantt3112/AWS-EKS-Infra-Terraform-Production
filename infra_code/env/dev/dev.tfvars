@@ -1,0 +1,49 @@
+
+common_tags = {
+  name   = "demo-name"
+  owner  = "demo-terraform"
+  # client = "demo-client"
+  env    = "demo-dev"
+  team   = "jrdevops-team"
+}
+aws_region = "ap-south-1"
+# client_name = Nishant-29jan
+client_name= "nishant_29Jan"
+cidr_block  = "100.0.0.0/16"
+public_subnet = [{
+  cidr_block = "100.0.1.0/24"
+  },
+  {
+    cidr_block = "100.0.2.0/24"
+}]
+private_subnet = [{
+  cidr_block = "100.0.21.0/24"
+  },
+  {
+    cidr_block = "100.0.22.0/24"
+  },
+  {
+    cidr_block = "100.0.23.0/24"
+}]
+
+aws_vpc_security_group = {
+  http = {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  },
+  ssh = {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  },
+  https = {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
