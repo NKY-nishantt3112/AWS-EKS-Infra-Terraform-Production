@@ -2,6 +2,8 @@ aws_region = "ap-south-1"
 
 client_name = "nishant"
 
+
+
 common_tags = {
   name   = "demo-name"
   owner  = "demo-terraform"
