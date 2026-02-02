@@ -8,6 +8,7 @@ module "data_azs" {
   source = "../../modules/data"
 }
 
+
 module "eks_vpc" {
   source = "../../modules/vpc"
 
