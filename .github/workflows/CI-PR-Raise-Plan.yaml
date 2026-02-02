@@ -5,6 +5,10 @@ on:
    pull_request:
     branches:
       - dev
+    paths:
+      - 'infra_code/env/dev/*'
+      - 'infra_code/env/dev/*.tf'
+      - 'infra_code/modules/**/*.tf'
 
 permissions:
   id-token: write
@@ -48,8 +52,4 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -var-file=dev.tfvars
-
-      - name: Terraform Apply
-        run: |
-          terraform apply -var-file=dev.tfvars
      
