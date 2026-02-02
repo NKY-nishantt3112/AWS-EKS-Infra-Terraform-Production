@@ -52,9 +52,4 @@ jobs:
       - name: Terraform Apply
         run: |
            terraform apply --auto-approve -var-file=dev.tfvars
-
-      
-      - name: Terraform Apply
-        run: |
-          terraform apply --auto-approve -var-file=dev.tfvars 
      
