@@ -1,8 +1,8 @@
-
 name: Terraform Apply
 
 on:
-   push: 
+  pull_request:
+    types: [closed]
     branches:
       - dev
 
@@ -12,11 +12,19 @@ permissions:
   pull-requests: write
 
 jobs:
-  terraform-plan:
+  terraform-apply:
+    # Run only if PR is merged AND label exists
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(github.event.pull_request.labels.*.name, 'terraform-apply')
+     
+
     runs-on: ubuntu-latest
+
     defaults:
-      run: 
+      run:
         working-directory: infra_code/env/dev/
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,31 +33,25 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::851687812387:role/github-actions-terraform-apply-role-dev-acc
-          role-session-name: GitHubActions-TerraformPlan
+          role-session-name: GitHubActions-TerraformApply
           aws-region: ap-south-1
-  
-      - name: Installing Terraform 
+
+      - name: Installing Terraform
         uses: hashicorp/setup-terraform@v3
-        with: 
+        with:
           terraform_version: "1.14.3"
-            
+
       - name: Terraform Init
-        run: |
-          terraform init
+        run: terraform init
 
       - name: Terraform fmt
-        run: | 
-          terraform fmt
+        run: terraform fmt
 
       - name: Terraform Validate
-        run: | 
-          terraform validate
+        run: terraform validate
 
       - name: Terraform Plan
-        run: |
-          terraform plan -var-file=dev.tfvars
+        run: terraform plan -var-file=dev.tfvars
 
       - name: Terraform Apply
-        run: |
-           terraform apply --auto-approve -var-file=dev.tfvars
-     
+        run: terraform apply --auto-approve -var-file=dev.tfvars
