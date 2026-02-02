@@ -24,7 +24,7 @@ jobs:
       - name: Configure AWS Credentials via OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::851687812387:role/github-actions-terraform-plan-role-dev-acc
+          role-to-assume: arn:aws:iam::851687812387:role/github-actions-terraform-apply-role-dev-acc
           role-session-name: GitHubActions-TerraformPlan
           aws-region: ap-south-1
   
@@ -48,6 +48,10 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan -var-file=dev.tfvars
+
+      - name: Terraform Apply
+        run: |
+           terraform apply --auto-approve -var-file=dev.tfvars
 
       
       - name: Terraform Apply
