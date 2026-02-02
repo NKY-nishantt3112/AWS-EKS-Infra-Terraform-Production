@@ -44,11 +44,16 @@ jobs:
       - name: Terraform fmt
         run: | 
           terraform fmt
+          
+      - name: Terraform Force Unlock (if stuck)
+        run: |
+          terraform force-unlock -force 2ca4c4bb-9673-0f44-b470-c80e7a7d5a5a
+
 
       - name: Terraform Validate
         run: | 
           terraform validate
-          terraform force-unlock 2ca4c4bb-9673-0f44-b470-c80e7a7d5a5a
+          
 
       - name: Terraform Plan
         run: |
