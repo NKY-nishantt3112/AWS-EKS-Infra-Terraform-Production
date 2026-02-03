@@ -12,13 +12,10 @@ permissions:
   pull-requests: write
 
 jobs:
-  terraform-apply:
-    # Run only if PR is merged AND label exists
-    if: >
-      github.event.pull_request.merged == true &&
+  terraform-apply: 
+    if: github.event.pull_request.merged == true &&
       contains(github.event.pull_request.labels.*.name, 'terraform-apply')
      
-
     runs-on: ubuntu-latest
 
     defaults:
